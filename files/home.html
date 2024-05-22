@@ -14,25 +14,20 @@
 
     <title>Social</title>
 </head>
-
+<style>
+    /* Add custom styles for positioning the logout button */
+    #logout {
+        position: fixed;
+        top: 20px; /* Adjust the top position as needed */
+        right: 20px; /* Adjust the left position as needed */
+        z-index: 999; /* Ensure the button is above other elements */
+    }
+</style>
 <body>
-    
-    <div id="home" class="container-main home bg-slate-100 pb-20">
-        <!-- // Nav -->
-        <div class="shadow-lg mb-20 mt-1 bg-slate-200 flex items-center justify-between p-4 rounded">
-            <ul class="flex gap-5">
-                <li>Nehru</li>
-                <li>Home</li>
-                <li>Profile</li>
-            </ul>
+    <div id="home" class="container-main home bg-slate-100 pb-20 pt-5">
+        <!-- Logout button positioned on the left side -->
+        <button id="logout" onclick="logout()" class="px-5 w-30 rounded-md text-lg py-3 bg-blue-600 font-bold tracking-wide text-slate-100">Logout</button>
 
-            <button
-                id="logout"
-                onclick="logout()"
-                class="px-5 w-30 rounded-md text-lg py-3 bg-blue-600 font-bold tracking-wide text-slate-100">
-                Logout
-            </button>
-        </div>
         <!-- // Nav -->
 
         <!-- // New Post -->
