@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="./style.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="../node_modules/axios/dist/axios.min.js"></script>
+
+        <title>Social</title>
+    </head>
+
+    <body>
+        
+        <div id="home" class="container-main home bg-slate-100 pb-20">
+            <!-- // Nav -->
+            <div
+                class="shadow-lg mb-20 mt-1 bg-slate-200 flex items-center justify-between p-4 rounded">
+                <ul class="flex gap-5">
+                    <li>Nehru</li>
+                    <li>Home</li>
+                    <li>Profile</li>
+                </ul>
+
+                <button
+                    id="logout"
+                    onclick="logout()"
+                    class="px-5 w-30 rounded-md text-lg py-3 bg-blue-600 font-bold tracking-wide text-slate-100">
+                    Logout
+                </button>
+            </div>
+            <!-- // Nav -->
+
+            <!-- // New Post -->
+
+            <!-- // New Post -->
+
+            <!-- // Post -->    
+            <div class="home flex items-center flex-col justify-center gap-5">
+
+                <!-- // form -->
+                <div id="new-post"
+                    class="create-post bg-white p-5 hidden absolute top-44 rounded-lg">
+
+                    <!-- // header -->
+                    <div class="border-b mb-5">
+                        <div class="flex items-center text-3xl mb-2">
+                            <span
+                                class="ml-auto font-semibold text-gray-700">Create
+                                post</span>
+                            <span
+                                onclick="closeNewPost()"
+                                class="ml-auto cursor-pointer rounded-full py-2 px-4 text-gray-600 bg-gray-200">X</span>
+                        </div>
+                    </div>
+                    <!-- // header -->
+
+                    <textarea
+                        id="body-post"
+                        placeholder="What’s on Your Mind"
+                        class="resize-none w-full h-72 border outline-none p-3 text-3xl text-gray-950"
+                        style="width: 100%"></textarea>
+
+                    <input id="img-post" type="file" class="hidden " />
+                    <label for="img-post"
+                        class="cursor-pointer block border border-gray-300 bg-white rounded-md px-4 py-5 text-xl text-gray-700 hover:border-gray-400 hover:bg-gray-100">
+                        Choose Image
+                    </label>
+
+                    <!-- <input id="img-post" type="file" placeholder="add img"
+                        class="border outline-none p-5 w-full" /> -->
+
+                    <button
+                        onclick="createNewPost()"
+                        class="p-3 mt-5 w-full rounded text-xl font- text-white bg-sky-600">Post</button>
+                </div>
+                <!-- // form -->
+
+                <div
+                    id="new"
+                    class="new-post bg-white flex items-center gap-2 rounded-md">
+                    <img
+                        class="w-14 rounded-3xl my-5 ml-3"
+                        src="../img/icon.jpeg"
+                        alt />
+                    <span
+                        class="bg-gray-100 hover:bg-gray-200 hover:text-gray-500 text-gray-400 cursor-pointer text-xl px-7 my-5 py-4 rounded-3xl"
+                        onclick="openNewPost()">
+                        add a new post
+                    </span>
+                </div>
+
+                <div id="post" class="flex flex-col items-center">
+                </div>
+            </div>
+
+            <!-- // Post -->
+            
+            <script src="./script.js"></script>
+            <script>
+                updateLogin();
+            </script>
+        </div>
+    </body>
+</html>

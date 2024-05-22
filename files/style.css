@@ -1,0 +1,77 @@
+    open-sans-<uniquifier> {
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+        font-variation-settings: "wdth"100;
+    }
+
+    /* local */
+    body {
+        font-family: "Open Sans Variable", sans-serif;
+        font-optical-sizing: auto;
+    }
+
+    .container-main {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+
+    /* local */
+
+    /* login */
+
+    .main {
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .login input {
+        width: 500px;
+    }
+
+    .login #Login {
+        width: 500px;
+    }
+
+    .login hr {
+        width: 460px;
+    }
+
+    /* login */
+
+    /* home */
+    .home .new-post {
+        width: 900px;
+    }
+
+    .home .new-post span {
+        width: 88%;
+    }
+
+    .home .new-post span {
+        width: 88%;
+    }
+
+    .post {
+        width: 900px;
+    }
+
+    .post .body img {
+        width: 100%;
+    }
+
+    .create-post {
+        width: 700px;
+    }
+
+    .comment-img img{
+        width: 50px !important;
+    }
+
+    #commentsBody input{
+        width: 98%;
+    }
+
+    /* home */
