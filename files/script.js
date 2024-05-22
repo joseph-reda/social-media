@@ -88,7 +88,6 @@ function logout() {
 function loginClick() {
   const username = document.getElementById("userName-input").value;
   const password = document.getElementById("password-input").value;
-  console.log("aaaaaaaaaaaa");
 
   const params = {
     username: username,
@@ -99,7 +98,14 @@ function loginClick() {
     .post(url, params)
     .then((response) => {
       if (response.data && response.data.token) {
-       console.log("nehruggggggg");
+        const token = response.data.token;
+        const user = response.data.user;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
+        window.location.href = "./files/home.html";
+
+        updateLogin();
       }
     })
     .catch((error) => {
