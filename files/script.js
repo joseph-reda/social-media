@@ -88,6 +88,7 @@ function logout() {
 function loginClick() {
   const username = document.getElementById("userName-input").value;
   const password = document.getElementById("password-input").value;
+  console.log("aaaaaaaaaaaa");
 
   const params = {
     username: username,
