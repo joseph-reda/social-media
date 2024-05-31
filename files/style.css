@@ -1,77 +1,140 @@
-    open-sans-<uniquifier> {
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: <weight>;
-        font-style: normal;
-        font-variation-settings: "wdth"100;
-    }
+open-sans-<uniquifier > {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
 
-    /* local */
-    body {
-        font-family: "Open Sans Variable", sans-serif;
-        font-optical-sizing: auto;
-    }
+/* local */
+body {
+  font-family: "Open Sans Variable", sans-serif;
+  font-optical-sizing: auto;
+}
 
-    .container-main {
-        padding-left: 20%;
-        padding-right: 20%;
-    }
+.container-main {
+  padding-left: 20%;
+  padding-right: 20%;
+}
 
-    /* local */
+/* local */
 
-    /* login */
+/* login */
 
-    .main {
-        width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+.login input {
+  width: 100%;
+}
 
-    .login input {
-        width: 500px;
-    }
+.login #Login {
+  width: 500px;
+}
 
-    .login #Login {
-        width: 500px;
-    }
+.login hr {
+  width: 460px;
+}
 
-    .login hr {
-        width: 460px;
-    }
+@media screen and (max-width: 550px) {
+  .login input {
+    width: 60%;
+  }
 
-    /* login */
+  .login button {
+    width: 70% !important;
+  }
+}
 
-    /* home */
-    .home .new-post {
-        width: 900px;
-    }
+.main {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-    .home .new-post span {
-        width: 88%;
-    }
+@media screen and (max-width: 800px) {
+  .main {
+    padding: 0px !important;
+  }
+  .container-main {
+    padding: 20px !important;
+  }
+  .main input {
+    font-size: 16px;
+  }
+  .main label {
+    font-size: 16px;
+  }
+  .main button {
+    font-size: 16px;
+  }
 
-    .home .new-post span {
-        width: 88%;
-    }
+  #logout {
+    margin-right: 6%;
+    width: 80%;
+    margin-top: -15px;
+  }
 
-    .post {
-        width: 900px;
-    }
+  .commint {
+    font-size: 18px;
+  }
+  .btn {
+    font-size: 18px;
+  }
+}
 
-    .post .body img {
-        width: 100%;
-    }
+/* login */
 
-    .create-post {
-        width: 700px;
-    }
+/* home */
+.home .new-post {
+  width: 100%;
+}
 
-    .comment-img img{
-        width: 50px !important;
-    }
+.home .new-post span {
+  width: 88%;
+}
 
-    #commentsBody input{
-        width: 98%;
-    }
+.home .new-post span {
+  width: 88%;
+}
+@media screen and (max-width: 800px) {
+  .home .new-post {
+    margin-top: 50px;
+  }
+}
 
-    /* home */
+.post {
+  width: 110%;
+}
+
+.post .body img {
+  width: 100%;
+}
+
+.create-post {
+  width: 700px;
+}
+@media screen and (max-width: 800px) {
+  .create-post {
+    width: 80% !important;
+  }
+  .create-post span {
+    font-size: 22px;
+  }
+  .create-post button {
+    font-size: 20px;
+  }
+  .create-post label {
+    font-size: 20px;
+  }
+  .create-post textarea {
+    font-size: 20px;
+  }
+}
+
+.comment-img img {
+  width: 50px !important;
+}
+
+#commentsBody input {
+  width: 98%;
+}
+
+/* home */

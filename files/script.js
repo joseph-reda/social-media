@@ -51,7 +51,7 @@ function updateLogin(page = 1) {
 
                         <div id="commentsBody" class="ml-5">
                             <div class="flex">
-                                <input id="inputNewComment-${post.id}" class="p-5 text-2xl mb-5 outline-none bg-gray-300 rounded-lg" type="text" placeholder="add a new comment">
+                                <input id="inputNewComment-${post.id}" class="commint p-5 text-2xl mb-5 outline-none bg-gray-300 rounded-lg" type="text" placeholder="add a new comment">
                                 <button onclick="addNewComment(${post.id})" class="btn text-white text-lg p-5 bg-blue-500 rounded-3xl mb-5 -ml-5">
                                     Send
                                 </button>
