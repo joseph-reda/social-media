@@ -7,31 +7,31 @@ let lastPage = 1;
 
 // SCROLL
 window.addEventListener("scroll", function () {
-    const endOfPage =
-        this.window.innerHeight + this.window.pageYOffset >=
-        document.body.offsetHeight;
+  const endOfPage =
+    this.window.innerHeight + this.window.pageYOffset >=
+    document.body.offsetHeight;
 
-    if (endOfPage && currentPage < lastPage) {
-        currentPage = currentPage + 1;
-        updateLogin(currentPage);
-    }
+  if (endOfPage && currentPage < lastPage) {
+    currentPage = currentPage + 1;
+    updateLogin(currentPage);
+  }
 });
 // END SCROLL
 
 function updateLogin(page = 1) {
-    if (token) {
-        axios.get(`${baseUrl}/posts?page=${page}`).then((response) => {
-            lastPage = response.data.meta.last_page;
-            console.log(lastPage);
-            const posts = response.data.data;
-            for (const post of posts) {
-                let postTitle = "";
+  if (token) {
+    axios.get(`${baseUrl}/posts?page=${page}`).then((response) => {
+      lastPage = response.data.meta.last_page;
+      console.log(lastPage);
+      const posts = response.data.data;
+      for (const post of posts) {
+        let postTitle = "";
 
-                if (post.title != null) {
-                    postTitle = post.title;
-                }
+        if (post.title != null) {
+          postTitle = post.title;
+        }
 
-                const content = `
+        const content = `
                     <div class="post bg-white rounded mb-8">
                         <div class="header bg-slate-200 flex gap-2 items-center p-2">
                             <img class="w-12 rounded-full ml-2" src=${post.author.profile_image} alt="icon">
@@ -59,126 +59,136 @@ function updateLogin(page = 1) {
                         </div>
                     </div>
                 `;
-                document.getElementById("post").innerHTML += content;
-            }
-        });
+        document.getElementById("post").innerHTML += content;
+      }
+    });
 
-        console.log("Token is found");
-    } else {
-        console.log("Token not found");
-        alert("Token not found");
-    }
+    console.log("Token is found");
+  } else {
+    console.log("Token not found");
+    alert("Token not found");
+  }
 }
 //end get posts
 
 //logout
 function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setTimeout(() => {
-        window.location.href = "../index.html";
-    }, 500);
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  setTimeout(() => {
+    window.location.href = "../index.html";
+  }, 500);
 }
 //end logout
 
 //login
 function loginClick() {
-    const username = document.getElementById("userName-input").value;
-    const password = document.getElementById("password-input").value;
+  const username = document.getElementById("userName-input").value;
+  const password = document.getElementById("password-input").value;
 
-    const params = {
-        username: username,
-        password: password,
-    };
-    const url = `${baseUrl}/login`;
-    axios
-        .post(url, params)
-        .then((response) => {
-            if (response.data && response.data.token) {
-                const token = response.data.token;
-                const user = response.data.user;
-                localStorage.setItem("token", token);
-                localStorage.setItem("user", JSON.stringify(user));
+  const params = {
+    username: username,
+    password: password,
+  };
+  const url = `${baseUrl}/login`;
+  axios
+    .post(url, params)
+    .then((response) => {
+      if (response.data && response.data.token) {
+        const token = response.data.token;
+        const user = response.data.user;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
-                window.location.href = "./files/home.html";
+        window.location.href = "./files/home.html";
 
-                updateLogin();
-            }
-        })
-        .catch((error) => {
-            alert("Username or password not successful");
-        });
+        updateLogin();
+      }
+    })
+    .catch((error) => {
+      alert("Username or password not successful");
+    });
 }
 //end login
 
 //create new account
+
+
+
 function createAccount() {
-    const registerUserName = document.getElementById("register-userName-input").value;
-    const registerName = document.getElementById("register-name-input").value;
-    const registerEmail = document.getElementById("register-email-input").value;
-    const registerPassword = document.getElementById("register-password-input").value;
-    const registerImage = document.getElementById("register-img").files[0];
+  const name = document.getElementById("register-name-input").value;
+  const username = document.getElementById("register-username-input").value;
+  const email = document.getElementById("register-email-input").value;
+  const password = document.getElementById("register-password-input").value;
+  const image = document.getElementById("register-image-input").files[0];
 
-    let formData = new FormData();
+  let formData = new FormData();
+  formData.append("name", name);
+  formData.append("username", username);
+  formData.append("email", email); // Include email in the formData
+  formData.append("password", password);
+  formData.append("image", image);
 
-    formData.append("username", registerUserName);
-    formData.append("password", registerPassword);
-    formData.append("name", registerName);
-    formData.append("email", registerEmail);
-    formData.append("image", registerImage);
+  const headers = {
+    "Content-Type": "multipart/form-data",
+  };
 
-    const url = `${baseUrl}/register`;
+  const url = `${baseUrl}/register`;
 
-    axios
-        .post(url, formData)
-        .then((response) => {
-            if (response.data && response.data.token) {
-                const token = response.data.token;
-                const user = response.data.user;
-                localStorage.setItem("token", token);
-                localStorage.setItem("user", JSON.stringify(user));
+  axios
+    .post(url, formData, { headers: headers })
+    .then((response) => {
+      console.log(response.data);
 
-                window.location.href = "./home.html";
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
 
-                updateLogin();
-            }
-        })
-        .catch((error) => {
-            alert("Registration failed. Please check your information and try again.");
-        });
+      window.location.href = "./home.html"; // Redirect to home page
+    })
+    .catch((error) => {
+      if (error.response && error.response.data) {
+        console.error("Error response data:", error.response.data);
+      } else {
+        console.error("Error:", error.message);
+      }
+      alert(
+        "Registration failed. Please check your information and try again."
+      );
+    });
 }
+
 //end create new account
 
 //create New Post
 function openNewPost() {
-    document.getElementById("new-post").classList.remove("hidden");
+  document.getElementById("new-post").classList.remove("hidden");
 }
 
 function closeNewPost() {
-    document.getElementById("new-post").classList.add("hidden");
+  document.getElementById("new-post").classList.add("hidden");
 }
 
 function createNewPost() {
-    closeNewPost();
+  closeNewPost();
 
-    const bodyInput = document.getElementById("body-post").value;
-    const imgInput = document.getElementById("img-post").files[0];
+  const bodyInput = document.getElementById("body-post").value;
+  const imgInput = document.getElementById("img-post").files[0];
 
-    const formData = new FormData();
-    formData.append("body", bodyInput);
-    formData.append("image", imgInput);
+  const formData = new FormData();
+  formData.append("body", bodyInput);
+  formData.append("image", imgInput);
 
-    const headers = {
-        authorization: `Bearer ${token}`,
-    };
+  const headers = {
+    authorization: `Bearer ${token}`,
+  };
 
-    const url = `${baseUrl}/posts`;
+  const url = `${baseUrl}/posts`;
 
-    axios
-        .post(url, formData, {
-            headers: headers,
-        })
-        .then((response) => {});
+  axios
+    .post(url, formData, {
+      headers: headers,
+    })
+    .then((response) => {});
 }
 //end create New Post
 
@@ -186,18 +196,18 @@ function createNewPost() {
 let nnn = false;
 
 function showComments(postId) {
-    const url = `${baseUrl}/posts/${postId}`;
-    const commentsContainer = document.getElementById(`comments-${postId}`);
-    commentsContainer.innerHTML = "";
+  const url = `${baseUrl}/posts/${postId}`;
+  const commentsContainer = document.getElementById(`comments-${postId}`);
+  commentsContainer.innerHTML = "";
 
-    nnn = !nnn;
+  nnn = !nnn;
 
-    axios.get(url).then((response) => {
-        const comments = response.data.data.comments;
-        const userName = response.data.data.author.username;
-        for (const comment of comments) {
-            if (nnn == true) {
-                commentsContainer.innerHTML += `
+  axios.get(url).then((response) => {
+    const comments = response.data.data.comments;
+    const userName = response.data.data.author.username;
+    for (const comment of comments) {
+      if (nnn == true) {
+        commentsContainer.innerHTML += `
                     <div class="flex gap-3 items-center mb-5">
                         <span class="comment-img">
                             <img class="rounded-full ml-2" src="../img/icon.jpeg" />
@@ -207,29 +217,31 @@ function showComments(postId) {
                         </div>
                     </div>
                 `;
-            }
-        }
-    });
+      }
+    }
+  });
 }
 //end show Comments
 
 //Create Comments
 function addNewComment(postId) {
-    const inputNewComment = document.getElementById(`inputNewComment-${postId}`).value;
+  const inputNewComment = document.getElementById(
+    `inputNewComment-${postId}`
+  ).value;
 
-    const params = {
-        body: inputNewComment,
-    };
-    const url = `${baseUrl}/posts/${postId}/comments`;
+  const params = {
+    body: inputNewComment,
+  };
+  const url = `${baseUrl}/posts/${postId}/comments`;
 
-    axios
-        .post(url, params, {
-            headers: {
-                authorization: `Bearer ${token}`,
-            },
-        })
-        .then((response) => {
-            window.location.reload();
-        });
+  axios
+    .post(url, params, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      window.location.reload();
+    });
 }
 //end Create Comments
